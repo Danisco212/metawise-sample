@@ -1,0 +1,18 @@
+{
+  "name": "Metamind",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "cd packages && cd frontend && BUILD_PATH='../../dist' react-scripts build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "react-scripts": "5.0.1",
+    "backend": "workspace:backend",
+    "frontend": "workspace:frontend"
+  }
+}
