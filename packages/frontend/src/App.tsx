@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import './App.css';
+import React from 'react';
 import { LoginPage } from './pages/Login';
 import { TrackPage } from './pages/Track';
+import {Route, Routes} from 'react-router-dom'
 
 function App() {
-  const [page, setPage] = useState(0)
   return (
-    <div className="App">
-      {page === 0 ? <LoginPage change={setPage} /> : <TrackPage /> }
-    </div>
+    <Routes>
+      <Route path='/' element={<LoginPage />} />
+      <Route path='/track' element={<TrackPage />} />
+    </Routes>
   );
 }
 
