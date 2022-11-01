@@ -21,7 +21,8 @@ export const neurosityLoginApiCall = (body: NeurosityLoginProp) => {
                 reject(err)
             })
             .then(res => {
-                console.log('Login successful', res)
+                // console.log('Login successful', res)
+                // save the auth token to the cookies
                 returnToDispatch(dispath, NEUROSITY_LOGIN_SUCCESS, res)
                 resolve(res)
             })

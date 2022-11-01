@@ -1,10 +1,12 @@
 import React, { ChangeEvent, useState } from "react";
+import { useCookies } from "react-cookie";
 import { LoginPageProp } from ".";
 import { logo } from "../../assets";
 import { SizedBox } from "../../components";
 import './styles/Login.css'
-
+import { toast } from 'react-toastify';
 export const LoginPage = (props: LoginPageProp) => {
+    const [cookies, setCookie] = useCookies(['metawise_auth', 'metawise_user'])
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const handleChangeEmail = (e: ChangeEvent) => {
@@ -18,6 +20,9 @@ export const LoginPage = (props: LoginPageProp) => {
     }
 
     const attemptLogin = () => {
+        if(props.loading){
+            return
+        }
         if(!email || email.length < 6){
             alert('Please enter a valid email') // TODO: change this to a better option
             return
@@ -26,7 +31,13 @@ export const LoginPage = (props: LoginPageProp) => {
             alert('Please enter your password')
             return
         }
-        props.neuroLogin({email, password}).catch((err: any) => console.log(err))
+        props.neuroLogin({email, password})
+        .catch((err: any) => toast.error(err.message, {}))
+        .then((data: any) => {
+            setCookie('metawise_auth', data.user.Aa, {path: '/'})
+            setCookie('metawise_user', data.user.email, {path: '/'})
+            window.location.href = '/track'
+        })
     }
 
     const handleTough = () => {
@@ -47,7 +58,7 @@ export const LoginPage = (props: LoginPageProp) => {
                     <input onChange={handleChangePassword} value={password} type="password" className="rounded-lg text-sm h-9 w-80 px-3 border-2 outline-none" placeholder="*******" />
                     
                     <SizedBox height={10} />
-                    <button onClick={attemptLogin} className="text-sm w-80 mt-2 mb-5 font-bold bg-purple-500 h-9 rounded-lg text-white">Sign in</button>
+                    <button onClick={attemptLogin} className={(props.loading ? "bg-slate-400" : "bg-purple-500" ) +" text-sm w-80 mt-2 mb-5 font-bold h-9 rounded-lg text-white"}>Sign in</button>
 
                     <p className="text-sm">Don't have an account? <span onClick={handleTough} className="text-purple-500 cursor-pointer">Tough!</span></p>
                 </div>

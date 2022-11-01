@@ -4,6 +4,7 @@ import { LoginPage } from "./LoginPage";
 
 export type LoginPageProp = {
     neuroLogin: any
+    loading: boolean
 }
 
 const mapDispatchToProps = {
