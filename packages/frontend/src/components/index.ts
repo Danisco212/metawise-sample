@@ -1,1 +1,5 @@
 export * from './SizedBox'
+export * from './Header'
+export * from './SideMenu'
+export * from './SideMenuItem'
+export * from './StartButton'

@@ -3,7 +3,10 @@ import { logo } from "../../assets";
 import { SizedBox } from "../../components";
 import './styles/Login.css'
 
-export const LoginPage = () => {
+export const LoginPage = ({change}: any) => {
+    const handleChange = () => {
+        change(1)
+    }
     const handleTough = () => {
         alert('Thats tough bro!')
     }
@@ -20,7 +23,7 @@ export const LoginPage = () => {
                     <p className="font-medium text-xs mb-1">Password</p>
                     <input type="password" className="rounded-lg text-sm h-9 w-80 px-3 border-2 outline-none" placeholder="*******" />
                     <SizedBox height={10} />
-                    <button className="text-sm w-80 mt-2 mb-5 font-bold bg-purple-500 h-9 rounded-lg text-white">Sign in</button>
+                    <button onClick={handleChange} className="text-sm w-80 mt-2 mb-5 font-bold bg-purple-500 h-9 rounded-lg text-white">Sign in</button>
 
                     <p className="text-sm">Don't have an account? <span onClick={handleTough} className="text-purple-500 cursor-pointer">Tough!</span></p>
                 </div>
