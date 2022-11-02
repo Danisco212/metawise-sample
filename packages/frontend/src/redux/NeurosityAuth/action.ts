@@ -7,12 +7,12 @@ export type NeurosityLoginProp = {
     password: string
 }
 
-export const neurosityLoginApiCall = (body: NeurosityLoginProp) => {
+export const neurosityLoginApiCall = (deviceId: string, body: NeurosityLoginProp) => {
     return (dispath: any) => {
         returnToDispatch(dispath, NEUROSITY_LOGIN_REQUEST)
         return new Promise(async (resolve, reject) => {
             const notion = new Notion({
-                deviceId: process.env.DEVICE_ID
+                deviceId,
             });
             notion.login(body)
             .catch(err => {
