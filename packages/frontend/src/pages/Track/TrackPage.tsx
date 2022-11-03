@@ -1,5 +1,6 @@
 import React from "react";
-import { Header, StartButton } from "../../components";
+import { StartButton } from "../../components";
+import Header from "../../components/Header";
 import { SideMenu } from "../../components/SideMenu";
 
 export const TrackPage = () => {

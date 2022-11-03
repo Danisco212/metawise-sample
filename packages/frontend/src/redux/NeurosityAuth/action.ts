@@ -23,7 +23,9 @@ export const neurosityLoginApiCall = (deviceId: string, body: NeurosityLoginProp
             .then(res => {
                 // console.log('Login successful', res)
                 // save the auth token to the cookies
-                returnToDispatch(dispath, NEUROSITY_LOGIN_SUCCESS, res)
+                let payload: any = res
+                payload.notion = notion
+                returnToDispatch(dispath, NEUROSITY_LOGIN_SUCCESS, payload)
                 resolve(res)
             })
         })

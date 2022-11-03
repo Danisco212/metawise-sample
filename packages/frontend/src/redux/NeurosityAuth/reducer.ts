@@ -20,7 +20,7 @@ export const neurosityReducer = (state = initialState, action: ReducerType) => {
         case NEUROSITY_LOGIN_SUCCESS:
             return Object.assign({}, state, {
                 loading: false,
-                authData: action.payload
+                authData: action.payload,
             })
         case NEUROSITY_LOGIN_FAILURE:
             return Object.assign({}, state, {
