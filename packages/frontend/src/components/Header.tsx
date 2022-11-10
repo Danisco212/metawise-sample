@@ -33,14 +33,14 @@ export const Header = (props: any) => {
         window.location.href = '/'
     }
     return(
-        <header className="z-10 fixed bg-white p-10 max-h-10 w-screen flex flex-row items-center justify-between">
+        <header className="shadow z-10 fixed bg-white p-10 max-h-10 w-screen flex flex-row items-center justify-between">
             <div className="cursor-pointer flex flex-row items-center">
                 <img className=" rounded-full h-7 w-7 mr-2" src={logo} alt='' />
                 <p className="font-bold text-sm">Metawise</p>
             </div>
             {notionStatus && (
                 <div className="flex flex-row items-center justify-center">
-                    <div className={"rounded-full h-4 w-4 " + (notionStatus.state === 'offline' ? 'bg-red-500' : 'bg-green-500')} /> {/* status symbol */}
+                    <div className={"rounded-full h-4 w-4 " + (notionStatus.state !== 'online' ? 'bg-red-500' : 'bg-green-500')} /> {/* status symbol */}
                     <p className="mr-3 ml-1 text-sm">{notionStatus.state}</p>
                     <p className="text-sm">{notionStatus.battery}%</p>
                 </div>
