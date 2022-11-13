@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { toast } from "react-toastify";
@@ -9,6 +10,7 @@ import { SideMenu } from "../../components/SideMenu";
 let notion:any
 const TrackPage = (props: any) => {
     const [tracking, setTracking] = useState(false)
+    const [trackedData, setTrackedData] = useState<any>([])
     const randomIntFromInterval = (min: number, max: number) => { // min and max included 
         return Math.floor(Math.random() * (max - min + 1) + min)
     }
@@ -23,7 +25,7 @@ const TrackPage = (props: any) => {
         if(props.authData){
             setTracking(true)
             notion = props.authData.notion.brainwaves("powerByBand").subscribe((brainwaves: any) => {
-                console.log(brainwaves);
+                setTrackedData((prev: any) => [...prev, brainwaves])
             });
         }
     }
@@ -32,6 +34,11 @@ const TrackPage = (props: any) => {
         toast('Tracking completed')
         setTracking(false)
         notion.unsubscribe();
+        console.log('the tracked data is', trackedData);
+        // hard coded saving
+        axios.post("localhost:5676", trackedData)
+        .then(res => toast("Data saved successfully"))
+        .catch(err => toast.error("Data failed to save"))
     }
     return(
         <div className="h-screen bg-slate-200">

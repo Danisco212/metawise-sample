@@ -1,7 +1,7 @@
 const express = require('express')
 const morgan = require('morgan')
 const mongoose = require('mongoose')
-
+const bodyParser = require('body-parser')
 // get routes
 const eegRoutes = require('./routes/eegdata.route')
 
@@ -22,5 +22,10 @@ mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology:true})
 
 // setup middlewares
 app.use(express.static('public'))
+app.use(
+    bodyParser.json({
+      limit: "10000kb",
+    })
+  );
 app.use(morgan('dev'))
 app.use('/api/v1/', eegRoutes)
