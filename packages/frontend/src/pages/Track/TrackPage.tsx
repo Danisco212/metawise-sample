@@ -36,7 +36,7 @@ const TrackPage = (props: any) => {
         notion.unsubscribe();
         console.log('the tracked data is', trackedData);
         // hard coded saving
-        axios.post("localhost:5676", trackedData)
+        axios.post("https://metawise-sample-backend.vercel.app/api/v1/powerband/save", trackedData)
         .then(res => toast("Data saved successfully"))
         .catch(err => toast.error("Data failed to save"))
     }
