@@ -21,6 +21,12 @@ mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology:true})
     .catch((err) => { console.log('Error connecting to db', err)})
 
 // setup middlewares
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE');
+  next();
+});
 app.use(express.static('public'))
 app.use(
     bodyParser.json({
